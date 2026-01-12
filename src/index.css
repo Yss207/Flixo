@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* index.css */
+
+@layer utilities {
+  /* Minimalist Scrollbar */
+  .hide-scrollbar::-webkit-scrollbar {
+    height: 8px; /* Height of the horizontal scrollbar */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* Track is invisible */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #4b5563; /* Dark Gray (matches gray-600) */
+    border-radius: 20px;       /* Round edges */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #6b7280; /* Lighter gray on hover */
+  }
+}
