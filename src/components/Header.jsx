@@ -78,7 +78,7 @@ const Header = () => {
   ];
 
   return (
-    <div className="fixed w-full px-8 py-2 bg-gradient-to-b from-black z-50 flex flex-col md:flex-row justify-between items-center transition-all duration-300">
+    <div className="fixed w-full px-8 py-2 bg-linear-to-b from-black z-50 flex flex-col md:flex-row justify-between items-center transition-all duration-300">
       {/* 1. Left Side: Logo & Navigation */}
       <div className="flex items-center gap-8">
         <img
