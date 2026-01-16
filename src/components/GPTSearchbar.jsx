@@ -44,7 +44,7 @@ const GPTSearchBar = () => {
   return (
     // 🟢 MOBILE FIX 1: 'pt-[40%]' ensures it doesn't hide behind the header on mobile
     // 🟢 MOBILE FIX 2: 'md:pt-[10%]' keeps it high up on desktop
-    <div className="pt-[40%] md:pt-[10%] flex justify-center">
+    <div className="pt-[5%] md:pt-[2%] flex justify-center">
       <form
         // 🟢 MOBILE FIX 3: 'w-[95%]' prevents edge-touching on mobile
         className="w-[95%] md:w-1/2 bg-black grid grid-cols-12 rounded-lg"
