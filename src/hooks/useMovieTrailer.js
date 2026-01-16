@@ -11,10 +11,7 @@ const useMovieTrailer = (movieId) => {
         if (!movieId) return;
 
         const data = await fetch(
-            "https://api.themoviedb.org/3/movie/" +
-            movieId + // <--- This was 'undefined' before
-            "/videos?language=en-US",
-            API_OPTIONS
+            `/api/proxy?endpoint=movie/${movieId}/videos`
         );
 
         const json = await data.json();
