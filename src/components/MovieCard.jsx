@@ -32,16 +32,14 @@ const MovieCard = ({ movie }) => {
 
         {/* 🟢 HOVER OVERLAY (Desktop Only) */}
         {/* Shows Title, Year, and IMDb Button on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 rounded-md flex flex-col justify-end p-3">
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 rounded-md flex flex-col justify-end p-3">
           <h3 className="text-white font-bold text-sm mb-1 drop-shadow-md leading-tight">
             {title}
           </h3>
 
           <div className="flex items-center justify-between text-[10px] text-gray-300 mb-2">
             <span>{release_date?.split("-")[0]}</span>
-            <span className="border border-gray-500 px-1 rounded text-xs">
-              HD
-            </span>
+            
           </div>
 
           <p className="text-[10px] text-gray-200 line-clamp-3 mb-2">
