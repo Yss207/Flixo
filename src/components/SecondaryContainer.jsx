@@ -19,18 +19,32 @@ const SecondaryContainer = () => {
           5. 'relative z-20': Ensures this sits ON TOP of the background video.
       */}
       <div className="mt-0 md:-mt-45 pl-4 md:pl-12 relative z-20">
-        <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} id = "now-playing" />
+        <MovieList
+          title={"Now Playing"}
+          movies={movies.nowPlayingMovies}
+          id="now-playing"
+        />
 
         {/* Note: Ensure this matches your Redux slice name (likely 'popularMovies') */}
-        <MovieList title={"Popular"} movies={movies.popularMovies} id = "popular" />
+        <MovieList
+          title={"Popular"}
+          movies={movies.popularMovies}
+          id="popular"
+        />
+
+        <AIFeatureBanner />
 
         <MovieList
           title={"Critically Acclaimed"}
           movies={movies.topRatedMovies}
-          id = "top-rated"
+          id="top-rated"
         />
 
-        <MovieList title={"Upcoming"} movies={movies.upcomingMovies} id = "upcoming" />
+        <MovieList
+          title={"Upcoming"}
+          movies={movies.upcomingMovies}
+          id="upcoming"
+        />
       </div>
     </div>
   );
