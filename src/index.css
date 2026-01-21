@@ -8,6 +8,9 @@ body {
   font-family: "Outfit", sans-serif;
 }
 
+.font-sans {
+  font-family: "Outfit", sans-serif;
+}
 /* index.css */
 
 @layer utilities {
