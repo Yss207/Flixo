@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* 🟢 1. Import the Font directly here (Cleaner than putting it in HTML) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/* 🟢 2. Force the font on the whole app */
+body {
+  font-family: "Outfit", sans-serif;
+}
+
 /* index.css */
 
 @layer utilities {
