@@ -37,11 +37,11 @@ const VideoTitle = ({ title, overview, movieId }) => {
       md:aspect-video md:h-auto md:justify-center md:pb-0 md:pl-24 md:bg-gradient-to-r md:from-black md:via-black/50 md:to-transparent md:pt-[15%]
     "
     >
-      <h1 className="text-4xl md:text-6xl font-extrabold drop-shadow-lg tracking-tight mb-3 md:mb-4 leading-none">
+      <h1 className="text-2xl md:text-4xl font-extrabold drop-shadow-lg tracking-tight mb-3 md:mb-4 leading-none">
         {title}
       </h1>
 
-      <p className="hidden md:inline-block py-6 text-lg w-2/5 text-gray-200 leading-relaxed font-light drop-shadow-md">
+      <p className="hidden md:inline-block py-6 text-md w-2/5 text-gray-200 leading-relaxed font-light drop-shadow-md">
         {overview}
       </p>
 
