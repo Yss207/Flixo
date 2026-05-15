@@ -1,4 +1,4 @@
- # Netflix GPT
+ # Flixo
 
    - Header
    - Login Form
