@@ -1,22 +1,22 @@
 # Flixo
 
-A Netflix-inspired movie discovery app that lets you browse trending films and get AI-powered recommendations — all in one place.
+A Netflix-inspired movie discovery app that lets you browse trending films and get AI-powered recommendations - all in one place.
 
 ---
 
 ## What is Flixo?
 
-Flixo combines a familiar streaming-style interface with the power of Google Gemini AI. You can browse movies from live TMDB catalogs (Now Playing, Popular, Top Rated, Upcoming, Indian) complete with background trailers — or switch to the AI search mode and describe what you're in the mood for in plain English. Gemini interprets your query, picks relevant titles, and Flixo fetches their full details and posters from TMDB instantly.
+Flixo combines a familiar streaming-style interface with the power of Google Gemini AI. You can browse movies from live TMDB catalogs (Now Playing, Popular, Top Rated, Upcoming, Indian) complete with background trailers - or switch to the AI search mode and describe what you're in the mood for in plain English. Gemini interprets your query, picks relevant titles, and Flixo fetches their full details and posters from TMDB instantly.
 
 ---
 
 ## Features
 
-- **Authentication** — Sign up / Sign in with email & password via Firebase Auth
-- **Browse Page** — Featured movie hero section with auto-playing YouTube trailer in the background
-- **Movie Catalogs** — Horizontally scrollable rows: Now Playing, Popular, Top Rated, Upcoming, Indian
-- **AI Search** — Type anything ("feel-good 90s comedies") and Gemini returns matching movie suggestions with posters and details
-- **Animated UI** — Smooth entrance transitions powered by Framer Motion
+- **Authentication** - Sign up / Sign in with email & password via Firebase Auth
+- **Browse Page** - Featured movie hero section with auto-playing YouTube trailer in the background
+- **Movie Catalogs** - Horizontally scrollable rows: Now Playing, Popular, Top Rated, Upcoming, Indian
+- **AI Search** - Type anything ("feel-good 90s comedies") and Gemini returns matching movie suggestions with posters and details
+- **Animated UI** - Smooth entrance transitions powered by Framer Motion
 
 ---
 
@@ -99,7 +99,7 @@ TMDB API calls are routed through a Vercel serverless function (`/api/proxy`) so
 
 Flixo is configured for two platforms simultaneously:
 
-- **Vercel** — handles the serverless proxy function and SPA routing (`vercel.json`)
-- **Firebase Hosting** — static hosting with SPA rewrite rules (`firebase.json`)
+- **Vercel** - handles the serverless proxy function and SPA routing (`vercel.json`)
+- **Firebase Hosting** - static hosting with SPA rewrite rules (`firebase.json`)
 
 Both rewrite all routes to `index.html` so React Router handles client-side navigation.
