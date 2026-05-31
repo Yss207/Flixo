@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../assets/flixo_logo_final.png";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGPTSearchView } from "../utils/gptSlice";
@@ -10,6 +10,7 @@ import { toggleGPTSearchView } from "../utils/gptSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const user = useSelector((store) => store.user);
   const showGPTSearch = useSelector((store) => store.gpt.showGPTSearch);
   const [activeTab, setActiveTab] = useState("");
@@ -48,7 +49,7 @@ const Header = () => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
         dispatch(addUser({ uid, email, displayName, photoURL }));
-        navigate("/browse");
+        if (location.pathname === "/") navigate("/browse");
       } else {
         dispatch(removeUser());
         navigate("/");
