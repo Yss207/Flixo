@@ -62,45 +62,45 @@ const MovieCard = ({ movie }) => {
       className="w-36 md:w-48 pr-4 relative group cursor-pointer"
       onClick={handleCardClick}
     >
-      {/* BOOKMARK BUTTON — sits on outer container so it doesn't scale with the image */}
-      <button
-        onClick={handleBookmarkClick}
-        className="absolute top-2 right-6 z-20"
-        aria-label={isInWatchlist ? "Remove from watchlist" : "Add to watchlist"}
-      >
-        {isInWatchlist ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="#ef4444"
-            className="w-6 h-6 drop-shadow-lg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="white"
-            className="w-6 h-6 drop-shadow-lg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
-            />
-          </svg>
-        )}
-      </button>
-
       {/* IMAGE CONTAINER — scales on hover */}
       <div className="relative transition-all duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:z-50">
+        {/* BOOKMARK BUTTON — inside scaling div so it moves with the poster */}
+        <button
+          onClick={handleBookmarkClick}
+          className="absolute top-2 right-2 z-20"
+          aria-label={isInWatchlist ? "Remove from watchlist" : "Add to watchlist"}
+        >
+          {isInWatchlist ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="white"
+              className="w-6 h-6 drop-shadow-lg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="white"
+              className="w-6 h-6 drop-shadow-lg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+              />
+            </svg>
+          )}
+        </button>
+
         <img
           alt={title}
           src={IMG_CDN_URL + poster_path}
