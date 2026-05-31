@@ -65,7 +65,7 @@ const MovieCard = ({ movie }) => {
       {/* BOOKMARK BUTTON — sits on outer container so it doesn't scale with the image */}
       <button
         onClick={handleBookmarkClick}
-        className="absolute top-2 right-6 z-20 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200"
+        className="absolute top-2 right-6 z-20"
         aria-label={isInWatchlist ? "Remove from watchlist" : "Add to watchlist"}
       >
         {isInWatchlist ? (
