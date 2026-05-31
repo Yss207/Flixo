@@ -5,6 +5,7 @@ import Login from "./Login"; // Keep Login normal (we want it fast)
 // 🟢 1. Lazy Load the heavy components
 // React won't download these files until the user actually goes to that URL
 const Browse = lazy(() => import("./Browse.jsx"));
+const Watchlist = lazy(() => import("./Watchlist.jsx"));
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -23,6 +24,18 @@ const Body = () => {
           }
         >
           <Browse />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/watchlist",
+      element: (
+        <Suspense
+          fallback={
+            <div className="bg-black h-screen text-white">Loading...</div>
+          }
+        >
+          <Watchlist />
         </Suspense>
       ),
     },

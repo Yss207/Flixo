@@ -1,41 +1,59 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { doc, setDoc, deleteDoc } from "firebase/firestore";
+import { db } from "../utils/firebase";
+import { addToWatchlist, removeFromWatchlist } from "../utils/watchlistSlice";
 import { IMG_CDN_URL } from "../utils/constants";
 
-// 🟢 Receive 'movie' prop instead of 'posterPath'
 const MovieCard = ({ movie }) => {
-  // 1. Safety check: If no movie or no poster, don't render
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
+  const watchlistMovies = useSelector(
+    (store) => store.watchlist.watchlistMovies
+  );
+
   if (!movie || !movie.poster_path) return null;
 
-  // 2. Destructure the data we need (Added 'id')
   const { id, poster_path, title, overview, release_date } = movie;
+  const isInWatchlist = watchlistMovies.some((m) => m.id === id);
 
-  // 🟢 SMART CLICK HANDLER:
-  // Fetches the specific IMDb ID via your Proxy so the link is accurate.
   const handleCardClick = async () => {
     try {
-      // 1. Ask your Proxy for the External IDs (Bypasses API blocks)
       const response = await fetch(
-        `/api/proxy?endpoint=movie/${id}/external_ids`,
+        `/api/proxy?endpoint=movie/${id}/external_ids`
       );
       const json = await response.json();
-
       const imdbId = json.imdb_id;
 
-      // 2. If we found the specific ID, go to that page
       if (imdbId) {
         window.open(`https://www.imdb.com/title/${imdbId}`, "_blank");
       } else {
-        // 3. Fallback: If no ID exists, search by title
-        const searchUrl = `https://www.imdb.com/find?q=${encodeURIComponent(title)}`;
-        window.open(searchUrl, "_blank");
+        window.open(
+          `https://www.imdb.com/find?q=${encodeURIComponent(title)}`,
+          "_blank"
+        );
       }
-    } catch (error) {
-      console.error("Failed to get IMDb ID:", error);
-      // Safety Fallback
+    } catch {
       window.open(
         `https://www.imdb.com/find?q=${encodeURIComponent(title)}`,
-        "_blank",
+        "_blank"
       );
+    }
+  };
+
+  const handleBookmarkClick = async (e) => {
+    e.stopPropagation();
+    if (!user?.uid) return;
+
+    const docRef = doc(db, "users", user.uid, "watchlist", String(id));
+
+    if (isInWatchlist) {
+      await deleteDoc(docRef);
+      dispatch(removeFromWatchlist(id));
+    } else {
+      const movieData = { id, title, poster_path, overview, release_date };
+      await setDoc(docRef, movieData);
+      dispatch(addToWatchlist(movieData));
     }
   };
 
@@ -53,8 +71,46 @@ const MovieCard = ({ movie }) => {
           loading="lazy"
         />
 
-        {/* 🟢 HOVER OVERLAY (Desktop Only) */}
-        {/* Fixed: 'bg-linear-to-t' -> 'bg-gradient-to-t' for standard Tailwind support */}
+        {/* BOOKMARK BUTTON — always visible on mobile, visible on hover on desktop */}
+        <button
+          onClick={handleBookmarkClick}
+          className="absolute top-2 right-6 z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200"
+          aria-label={isInWatchlist ? "Remove from watchlist" : "Add to watchlist"}
+        >
+          {isInWatchlist ? (
+            // Filled bookmark (saved)
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#ef4444"
+              className="w-6 h-6 drop-shadow-lg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ) : (
+            // Outlined bookmark (not saved)
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="white"
+              className="w-6 h-6 drop-shadow-lg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+              />
+            </svg>
+          )}
+        </button>
+
+        {/* HOVER OVERLAY (Desktop Only) */}
         <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 rounded-md flex flex-col justify-end p-3">
           <h3 className="text-white font-bold text-sm mb-1 drop-shadow-md leading-tight">
             {title}

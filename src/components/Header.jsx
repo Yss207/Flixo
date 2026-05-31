@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/flixo_logo_final.png";
-import userIcon from "../assets/avatar.png";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -110,6 +109,28 @@ const Header = () => {
       {/* 'mt-2 md:mt-0' adds slight spacing on mobile without creating dead space */}
       {user && (
         <div className="flex items-center gap-3 md:gap-6 mt-2 md:mt-0">
+          {/* WATCHLIST BUTTON */}
+          <button
+            onClick={() => navigate("/watchlist")}
+            className="flex items-center gap-2 py-1.5 px-4 md:py-2 md:px-5 rounded-full font-bold border border-white/30 text-white text-xs md:text-sm hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+              />
+            </svg>
+            <span>Watchlist</span>
+          </button>
+
           {/* GPT BUTTON */}
           <button
             className={`flex items-center gap-2 py-1.5 px-4 md:py-2 md:px-5 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg text-xs md:text-sm ${
@@ -158,11 +179,11 @@ const Header = () => {
 
           {/* USER PROFILE */}
           <div className="group relative flex items-center gap-2 cursor-pointer bg-black/20 p-1 rounded-full md:bg-transparent md:p-0">
-            <img
-              src={user?.photoURL || userIcon}
-              alt="user"
-              className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-white/20 group-hover:border-white transition-all duration-300"
-            />
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-600 flex items-center justify-center border-2 border-white/20 group-hover:border-white transition-all duration-300 shrink-0">
+              <span className="text-white font-bold text-sm select-none">
+                {user?.displayName?.[0]?.toUpperCase() || "U"}
+              </span>
+            </div>
 
             <div className="flex flex-col items-start pr-2">
               <span className="text-white text-xs md:text-sm font-semibold hidden md:block leading-none">
